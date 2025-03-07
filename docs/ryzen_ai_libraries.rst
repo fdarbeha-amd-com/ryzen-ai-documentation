@@ -143,16 +143,6 @@ Example
 
 Examples of the Ryzen-AI Library can be found `Ryzen AI Software repo <https://github.com/amd/RyzenAI-SW/tree/main/example/Ryzen-AI-Library>`_
 
-
-****************
-Revision History
-****************
-+-------------------+----------+------------------+
-| Date              | Revision | Notes            |
-+===================+==========+==================+
-| December 04, 2023 | 1.0      | Initial revision |
-+-------------------+----------+------------------+
-
 ..
   ------------
 
