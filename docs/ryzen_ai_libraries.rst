@@ -24,7 +24,7 @@ This section covers the steps to build all sample applications.
 
 Navigate to the folder containing Ryzen AI samples
 ==================================================
-Go to the 'samples' sub-folder of the Ryzen AI Library. ::
+Go to the 'samples' sub-folder of the Ryzen AI Library.:
   chdir samples
 
 Specify location of OpenCV libraries
