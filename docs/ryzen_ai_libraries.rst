@@ -1,148 +1,77 @@
 .. Copyright (C) 2023 Advanced Micro Devices, Inc. All rights reserved.
 
-##################################
-Ryzen AI Library Quick Start Guide
-##################################
+##############################################
+Getting started with Ryzen AI Library features
+##############################################
 
-The Ryzen AI Libraries are built on top of the Ryzen AI drivers and execution infrastructure to provide powerful AI capabilities to C++ applications without the need for training specific AI models and integrating them into the Ryzen AI framework.
+The Ryzen AI Libraies build on top of the Ryzen AI drivers and execution infrastructure to provide powerful AI capabilities to C++ applications without having to worry about training specific AI models and integrating them to the Ryzen AI framework.
 
 Each Ryzen AI library feature offers a simple C++ application programming interface (API) that can be easily incorporated into existing applications.
 
-******************
-Supported Features
-******************
-This release of the Ryzen AI Library supports the following features:
+*************
+Prerequisites
+*************
+Ensure that the following software tools/packages are installed on the development system.
 
-- Depth Estimation
-
-****************
-Package Contents
-****************
-
-The following files are included with the Ryzen AI Library package:
-
-include/
-  C++ header files
-windows/
-  Binary files for Windows, including both compile time .LIB files and runtime .DLL files
-thirdparty_lib/
-  Additional dependent libraries for sample applications (e.g., OpenCV binaries)
-samples/
-  Individual sample applications
-LICENSE.txt
-  License file
-README.rst
-  This file
-
-**************************************
-Programming guide for C++ Applications
-**************************************
-Incorporating the Ryzen AI's optimized features into C++ applications can be
-done in a few simple steps, as explained in the following sections.
-
-Include Ryzen AI Library headers
-================================
-The required definitions for compiling each Ryzen AI feature are included in a
-corresponding,
-
-  cvml-*<feature-name>*.h
-
-header file under the **include/** folder, where *<feature-name>* is the name
-of the desired Ryzen AI feature.
-
-For example, the definitions for the Ryzen AI Depth Estimation feature are
-available after adding a line similar to the following example::
-
-  #include <cvml-depth-estimation.h>
-
-Details about each feature's programming interface and expected usage are
-provided within their individual include headers.
-
-Create Ryzen AI Library context
-===============================
-Each Ryzen AI Library feature is created against a *CVML context*. The context provides access to common functions for logging and other purposes. A pointer to a new
-context may be obtained by calling the *CreateContext()* function::
-
-  auto ryzenai_context = amd::cvml::CreateContext();
-
-When no longer needed, the context may be released using its *Release()*
-member function::
-
-  ryzenai_context->Release();
-
-Create Ryzen AI Library feature object
-======================================
-The application programming interface for each feature is provided through a
-*Ryzen AI Library C++ feature object* that may be instantiated afer a
-Ryzen AI Library context has been created.
-
-The following example instantiates a feature object for the depth estimation
-library::
-
-  amd::cvml::DepthEstimation ryzenai_depth_estimation(ryzenai_context);
-
-Encapsulate image buffers
-=========================
-The Ryzen AI Library defines its own *Image* class to represent images
-and video frame buffers. Each *Image* object is assigned a specific format
-and data type on creation. For example, you can use the following code to create an *Image* to encapsulate an incoming
-RGB888 frame buffer::
-
-  amd::cvml::Image ryzenai_image(amd::cvml::Image::Format::kRGB,
-                                 amd::cvml::Image::DataType::kUint8, width,
-                                 height, data_pointer);
-
-Execute the feature
-===================
-To execute a Ryzen AI feature on a provided input, call the appropriate
-*execution* member function of the Ryzen AI Library feature object.
-
-For example, the following code executes a single instance of the depth
-estimation library, using the *ryzenai_image* from the previous section::
-
-  // encapsulate output buffer
-  amd::cvml::Image ryzenai_output(amd::cvml::Image::Format::kGrayScale,
-                                  amd::cvml::Image::DataType::kFloat32,
-                                  output_width, output_height, output_pointer);
-
-  // execute the feature
-  ryzenai_depth_estimation.GenerateDepthMap(ryzenai_image, &ryzenai_output);
+  1. Visual Studio 2022 Community edition or newer, ensure “Desktop Development with C++” is installed
+  2. Cmake (version >= 3.18)
+  3. OpenCV (version=4.8.1 or newer)
 
 *********************************************
-Building applications with Ryzen AI Libraries
+Building Ryzen AI Library sample applications
 *********************************************
-When building applications against the Ryzen AI Library, ensure that the
-library's,
+This section covers the steps to build all sample applications.
 
-  include/
+Navigate to the folder containing Ryzen AI samples
+==================================================
+Go to the 'samples' sub-folder of the Ryzen AI Library. ::
+  chdir samples
 
-folder is part of the compiler's include paths, and that the library's,
+Specify location of OpenCV libraries
+====================================
+Ryzen AI Library samples make use of OpenCV, so set an environment variable to let the build scripts know where to find OpenCV.::
 
-  windows/
+  set OPENCV_INSTALL_ROOT=<location of OpenCV libraries>
 
-folder has been added to the linker's library paths.
+Build the sample applications
+=============================
+Create a build folder and use CMAKE to build the sample(s).::
 
-Depending on the application's build environment, you might also need to
-explicitly list which of the Ryzen AI Library's .LIB files (when building for
-Windows applications) need to be linked.
+  mkdir build-samples
+  cmake -S %CD% -B %CD%\build-samples -DOPENCV_INSTALL_ROOT=%OPENCV_INSTALL_ROOT%
+  cmake --build %CD%\build-samples --config Release
 
-***********************************************
-Executing Ryzen AI Library enabled applications
-***********************************************
-When executing Windows applications built against the Ryzen AI Library, ensure
-that one of the following conditions is met:
+The compiled sample application(s) will be placed in the various build-samples\<application>\Release folder(s) under the 'samples' folder.
 
-1. The Ryzen AI Library dll's are in the same folder as the application
-   executable.
-2. The Ryzen AI Library's **windows/** folder has been added to the PATH
-   environment variable.
+*********************************************
+Running Ryzen AI Library sample applications
+*********************************************
+This section describes how to execute Ryzen AI Library sample applications.
 
-*******
-Example
-*******
+Update the console and/or system PATH
+=====================================
+Ryzen AI Library applications need to be able to find the library files. One way to do this is to add the location of the libraries to the system or console PATH environment variable.
 
-Examples of the Ryzen-AI Library can be found `Ryzen AI Software repo <https://github.com/amd/RyzenAI-SW/tree/main/example/Ryzen-AI-Library>`_
+Additionally, the location of OpenCV's runtime libraries needs to be added to the PATH environment variable::
 
+  set PATH=%PATH%;<location of Ryzen AI Library package>\windows
+  set PATH=%PATH%;%OPENCV_INSTALL_ROOT%\x64\vc16\bin
+
+Adjust the aforementioned commands to match the actual location of Ryzen AI and OpenCV libraries, respectively.
+
+Select an input source/image/video
+==================================
+Ryzen AI Library samples can accept a variety of image and video input formats, or even open the default camera on the system if "0" is specified as an input.
+
+In this example, a publically available video file is used for the application's input.::
+
+  curl -o dancing.mp4 https://videos.pexels.com/video-files/4540332/4540332-hd_1920_1080_25fps.mp4
+
+Execute the sample application
+==============================
+Finally, the previously built sample application can be executed with the selected input source.::
+
+  build-samples\cvml-sample-depth-estimation\Release\cvml-sample-depth-estimation.exe -i dancing.mp4
 ..
   ------------
 
