@@ -20,13 +20,11 @@ Ensure that the following software tools/packages are installed on the developme
 **************************************************
 Building Ryzen AI CVML library sample applications
 **************************************************
-This section covers the steps to build all sample applications.
+This section describes the steps to build Ryzen AI CVML library sample applications.
 
 Navigate to the folder containing Ryzen AI samples
 ==================================================
-Go to the 'samples' sub-folder of the Ryzen AI CVML library. 
-
-::
+Go to the 'samples' sub-folder of the Ryzen AI CVML library. ::
   
   chdir samples
 
@@ -55,7 +53,7 @@ Update the console and/or system PATH
 =====================================
 Ryzen AI CVML library applications need to be able to find the library files. One way to do this is to add the location of the libraries to the system or console PATH environment variable.
 
-Additionally, the location of OpenCV's runtime libraries needs to be added to the PATH environment variable. ::
+In this example, the location of OpenCV's runtime libraries is also added to the PATH environment variable. ::
 
   set PATH=%PATH%;<location of Ryzen AI CVML library package>\windows
   set PATH=%PATH%;%OPENCV_INSTALL_ROOT%\x64\vc16\bin
