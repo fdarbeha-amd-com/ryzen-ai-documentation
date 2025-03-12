@@ -28,7 +28,7 @@ Go to the 'samples' sub-folder of the Ryzen AI CVML library. ::
   
   chdir samples
 
-Specify location of OpenCV libraries
+Specify the location of OpenCV libraries
 ====================================
 Ryzen AI CVML library samples make use of OpenCV, so set an environment variable to let the build scripts know where to find OpenCV. ::
 
