@@ -1,7 +1,7 @@
-.. Copyright (C) 2023 Advanced Micro Devices, Inc. All rights reserved.
+.. Copyright (C) 2023-2025 Advanced Micro Devices, Inc. All rights reserved.
 
 ###################################################
-Getting started with Ryzen AI CVML Library features
+Getting started with Ryzen AI CVML library features
 ###################################################
 
 The Ryzen AI CVML libraies build on top of the Ryzen AI drivers and execution infrastructure to provide powerful AI capabilities to C++ applications without having to worry about training specific AI models and integrating them to the Ryzen AI framework.
@@ -18,7 +18,7 @@ Ensure that the following software tools/packages are installed on the developme
   3. OpenCV (version=4.8.1 or newer)
 
 **************************************************
-Building Ryzen AI CVML Library sample applications
+Building Ryzen AI CVML library sample applications
 **************************************************
 This section covers the steps to build all sample applications.
 
@@ -45,7 +45,7 @@ Create a build folder and use CMAKE to build the sample(s). ::
 The compiled sample application(s) will be placed in the various build-samples\<application>\Release folder(s) under the 'samples' folder.
 
 *************************************************
-Running Ryzen AI CVML Library sample applications
+Running Ryzen AI CVML library sample applications
 *************************************************
 This section describes how to execute Ryzen AI CVML library sample applications.
 
