@@ -24,7 +24,9 @@ This section covers the steps to build all sample applications.
 
 Navigate to the folder containing Ryzen AI samples
 ==================================================
-Go to the 'samples' sub-folder of the Ryzen AI CVML library. ::
+Go to the 'samples' sub-folder of the Ryzen AI CVML library. 
+
+::
   
   chdir samples
 
